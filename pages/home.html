@@ -61,12 +61,6 @@
             min-width: 0;
         }
 
-        .logo-mark {
-            height: 42px;
-            width: auto;
-            display: block;
-        }
-
         .logo-text {
             display: flex;
             flex-direction: column;
@@ -567,48 +561,123 @@
 
         /* Footer */
         footer {
-            background: var(--dark-brown);
-            color: var(--white);
-            padding: 3rem 5%;
+            background: #f0ebe4;
+            padding: 3rem 5% 0;
             margin-top: 5rem;
+            border-top: 1px solid #e5dcd0;
         }
 
-        .footer-content {
+        .footer-inner {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 2fr 1fr 1.2fr 1fr;
+            gap: 3rem;
+            padding-bottom: 2.5rem;
         }
 
-        .footer-section h3 {
-            color: var(--primary-gold);
+        .footer-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2e211b;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand-desc {
+            color: #756e64;
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2e211b;
             margin-bottom: 1rem;
-            font-size: 1.3rem;
         }
 
-        .footer-section p, .footer-section ul {
-            color: #B8A99A;
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        .footer-section ul {
+        .footer-col ul {
             list-style: none;
         }
 
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col ul li a {
+            color: #756e64;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #c2934a;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.65rem;
+            color: #756e64;
+            font-size: 0.88rem;
+        }
+
+        .footer-contact-item span.icon {
+            font-size: 0.95rem;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e5dcd0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #493a2f;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .footer-social a:hover {
+            background: #c2934a;
+            color: #fff;
         }
 
         .footer-bottom {
             max-width: 1400px;
-            margin: 3rem auto 0;
-            padding-top: 2rem;
-            border-top: 1px solid #5A4A40;
+            margin: 0 auto;
+            padding: 1.25rem 0;
+            border-top: 1px solid #e5dcd0;
             text-align: center;
-            color: #8B7B6B;
-            font-size: 0.9rem;
+            color: #9e9189;
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 968px) {
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Responsive */
@@ -625,6 +694,7 @@
                 box-shadow: 0 10px 30px rgba(0,0,0,0.10);
                 border-top: 1px solid var(--light-beige);
                 gap: 1rem;
+                z-index: 1001;
             }
 
             .nav-links.open {
@@ -662,8 +732,7 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-        }
+            }        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -688,7 +757,6 @@
     <nav>
         <div class="nav-container">
             <a href="home.html" class="logo" aria-label="Castro Catering Home">
-                <img class="logo-mark" src="../assets/c__Users_Stephanie_AppData_Roaming_Cursor_User_workspaceStorage_a55e77230a27fecf3e9354ad7deed453_images_logo-3cb36ab2-044f-4309-81e4-10c0fc1682b0.png" alt="Castro Catering logo" />
                 <span class="logo-text">
                     <span class="logo-title">Castro Catering</span>
                     <span class="logo-subtitle">Crafting elegant moments</span>
@@ -700,7 +768,7 @@
                 <li><a href="packages.html">Packages</a></li>
                 <li><a href="booking.html">Book Now</a></li>
                 <li><a href="bookingManagement.html">Calendar</a></li>
-                <li><a href="smartPicker.html">Smart Pick</a></li>
+                <li><a href="smart-pick.html">Smart Pick</a></li>
                 <li><a href="packages.html#reviews">Reviews</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="aboutUs.html">About Us</a></li>
@@ -872,29 +940,48 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Castro Catering</h3>
-                <p>Crafting unforgettable culinary experiences for weddings, corporate events, and intimate gatherings since 2009.</p>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand-name">Castro Catering</div>
+                <p class="footer-brand-desc">We are a home-based caterer focused on making celebrations accessible to everyone. We provide affordable, yet delicious, food packages for birthdays, christenings, anniversaries, and other special events.</p>
             </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
                 <ul>
-                    <li>123 Makati Avenue, Makati City</li>
-                    <li>+63 2 8924 4567</li>
-                    <li>hello@cadrecatering.ph</li>
+                    <li><a href="packages.html">Our Packages</a></li>
+                    <li><a href="booking.html">Book an Event</a></li>
+                    <li><a href="smart-pick.html">Smart Pick</a></li>
+                    <li><a href="aboutUs.html">About Us</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Hours</h3>
-                <ul>
-                    <li>Mon - Fri: 9:00 AM - 7:00 PM</li>
-                    <li>Sat - Sun: 10:00 AM - 5:00 PM</li>
-                </ul>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <span class="icon">📞</span>
+                    <span>0967 539 3045</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon">📍</span>
+                    <span>Argao, Cebu</span>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Castro Catering Services. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>© 2026 Castro Catering Services. All rights reserved.</p>
         </div>
     </footer>
 
