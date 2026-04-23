@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Castro Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #c2934a;
+            --light-gold: #f4d589;
+            --off-white: #fbf9f5;
+            --bg-cream: #f9f6f2;
+            --bg-white: #ffffff;
+            --bg-beige: #f0ebe4;
+            --bg-light: #f5ebd3;
+            --text-dark: #2e211b;
+            --text-brown: #493a2f;
+            --text-gray: #756e64;
+            --border-light: #e5dcd0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-white);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--bg-beige);
+            color: var(--primary-gold);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .user-info .name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .user-info .email {
+            color: var(--text-gray);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: none;
+            color: var(--text-brown);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, var(--bg-light), var(--bg-beige));
+            padding: 4rem 5%;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .hero-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+        }
+
+        /* Mission, Vision, Values */
+        .mvv-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .mvv-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s;
+        }
+
+        .mvv-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .mvv-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mvv-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .mvv-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: var(--bg-beige);
+            padding: 4rem 5%;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-header p {
+            color: var(--text-gray);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* Recognition Section */
+        .recognition-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 5%;
+        }
+
+        .recognition-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .recognition-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recognition-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .recognition-card p {
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-beige);
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content,
+            .mvv-section,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">🍽️</div>
+                Castro Catering
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="book.html">Book Now</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="smart-pick.html">Smart Pick</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="admin.html" style="background: var(--bg-beige); color: var(--primary-gold);">Admin</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="user-info">
+                    <div class="name">Sample Client</div>
+                    <div class="email">client@castro.com</div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <span>→</span> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-label">About Castro Catering</span>
+                <h1>A passion for hospitality, served on every plate.</h1>
+                <p>Founded in 2008, Castro Catering Services has grown from a small family kitchen into one of the most trusted names in event catering. We blend classic culinary craftsmanship with modern presentation to create memorable dining moments for every kind of celebration.</p>
+            </div>
+            <div class="hero-image">👨‍🍳</div>
+        </div>
+    </section>
+
+    <!-- Mission, Vision, Values -->
+    <section class="mvv-section">
+        <div class="mvv-card">
+            <div class="mvv-icon">🎯</div>
+            <h3>Our Mission</h3>
+            <p>To deliver flawless catering experiences through exceptional food, attentive service, and meticulous attention to detail.</p>
+        </div>
+
+        <div class="mvv-card">
+            <div class="mvv-icon">👁️</div>
+            <h3>Our Vision</h3>
+            <p>To be the most loved catering brand for life's most meaningful moments — locally and beyond.</p>
+        </div>
+
+        <div class="mvv-card">
+            <div class="mvv-icon">❤️</div>
+            <h3>Our Values</h3>
+            <p>Hospitality, craftsmanship, integrity, and a deep respect for every guest at every table.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <h2>Glimpses of our work</h2>
+            <p>A few favorite moments from celebrations we've had the honor to cater.</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">🍽️</div>
+            <div class="gallery-item">🎂</div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <!-- Recognition Section -->
+    <section class="recognition-section">
+        <div class="recognition-card">
+            <div class="recognition-icon">🏆</div>
+            <h3>Recognized for service excellence</h3>
+            <p>Awarded "Best Catering Service" by the Metro Hospitality Council for three consecutive years (2022, 2023, 2024). Member of the Philippine Association of Convention/Exhibition Organizers and Suppliers.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Castro Catering</h3>
+                <p>Crafting unforgettable culinary experiences for weddings, corporate events, and intimate gatherings since 2008.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>
+                    123 Reyes Avenue, Makati City<br>
+                    +63 2 8123 4567<br>
+                    hello@castrocatering.ph
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>
+                    Mon - Fri: 9:00 AM - 7:00 PM<br>
+                    Sat - Sun: 10:00 AM - 5:00 PM
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Castro Catering Services - Information Management Project Prototype</p>
+        </div>
+    </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
