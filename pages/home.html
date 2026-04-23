@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadre Catering - Crafting Elegant Moments</title>
+    <title>Castro Catering - Crafting Elegant Moments</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -50,18 +50,46 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--dark-brown);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
         }
 
-        .logo span {
-            color: var(--primary-gold);
+        .logo-mark {
+            height: 42px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+            min-width: 0;
+        }
+
+        .logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .nav-links {
@@ -77,36 +105,33 @@
             font-weight: 500;
             font-size: 0.9rem;
             transition: color 0.3s;
+            padding: 0.35rem 0.2rem;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: var(--primary-gold);
         }
 
+        .nav-links a.active {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--primary-gold);
+        }
+
         .nav-icons {
             display: flex;
             gap: 1.5rem;
             align-items: center;
-        }
-
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--primary-gold);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
         }
 
         .btn-login {
@@ -126,16 +151,37 @@
 
         .mobile-menu {
             display: none;
-            flex-direction: column;
-            gap: 4px;
             cursor: pointer;
+            border: 1px solid var(--light-beige);
+            background: var(--white);
+            border-radius: 12px;
+            padding: 0.55rem 0.65rem;
+            line-height: 0;
         }
 
         .mobile-menu span {
+            display: block;
             width: 25px;
             height: 2px;
             background: var(--dark-brown);
             transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu span + span {
+            margin-top: 5px;
+        }
+
+        .mobile-menu[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .mobile-menu[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Hero Section */
@@ -302,6 +348,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .packages-header h2 {
@@ -316,6 +363,92 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        /* Featured carousel */
+        .featured-carousel {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .carousel-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid var(--light-beige);
+            background: var(--white);
+            color: var(--dark-brown);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+        .carousel-viewport {
+            overflow: hidden;
+            border-radius: 18px;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 0.25rem 0.25rem 1.25rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-page {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 0 0.75rem;
+        }
+
+        .carousel-page-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .carousel-page-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .carousel-page-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-page {
+                padding: 0 0.25rem;
+            }
         }
 
         .packages-grid {
@@ -333,6 +466,8 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid var(--light-beige);
+            display: flex;
+            flex-direction: column;
         }
 
         .package-card:hover {
@@ -352,14 +487,25 @@
             overflow: hidden;
         }
 
-        .package-image::after {
-            content: '🍽️';
-            font-size: 3rem;
-            opacity: 0.5;
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* "View all packages" card: blur background image slightly */
+        .view-all-card .package-image img {
+            filter: blur(2px) brightness(0.9);
+            transform: scale(1.06);
         }
 
         .package-content {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 0.5rem;
         }
 
         .package-title {
@@ -381,6 +527,8 @@
             align-items: center;
             padding-top: 1rem;
             border-top: 1px solid var(--light-beige);
+            margin-top: auto;
+            gap: 1rem;
         }
 
         .package-price {
@@ -405,6 +553,11 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-book:hover {
@@ -462,10 +615,30 @@
         @media (max-width: 968px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1.25rem 5%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+                border-top: 1px solid var(--light-beige);
+                gap: 1rem;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a.active::after {
+                display: none;
             }
 
             .mobile-menu {
-                display: flex;
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             .hero-content {
@@ -514,34 +687,32 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">Cadre <span>Catering</span></a>
+            <a href="home.html" class="logo" aria-label="Castro Catering Home">
+                <img class="logo-mark" src="../assets/c__Users_Stephanie_AppData_Roaming_Cursor_User_workspaceStorage_a55e77230a27fecf3e9354ad7deed453_images_logo-3cb36ab2-044f-4309-81e4-10c0fc1682b0.png" alt="Castro Catering logo" />
+                <span class="logo-text">
+                    <span class="logo-title">Castro Catering</span>
+                    <span class="logo-subtitle">Crafting elegant moments</span>
+                </span>
+            </a>
             
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#packages">Packages</a></li>
-                <li><a href="#book">Book Now</a></li>
-                <li><a href="#calendar">Calendar</a></li>
-                <li><a href="#smart">Smart Pick</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#about">About Us</a></li>
+            <ul class="nav-links" id="primaryNav">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="bookingManagement.html">Calendar</a></li>
+                <li><a href="smartPicker.html">Smart Pick</a></li>
+                <li><a href="packages.html#reviews">Reviews</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="aboutUs.html">About Us</a></li>
             </ul>
 
             <div class="nav-icons">
-                <div class="cart-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <span class="cart-count">2</span>
-                </div>
                 <button class="btn-login">Log In</button>
-                <div class="mobile-menu" onclick="toggleMenu()">
+                <button class="mobile-menu" type="button" aria-label="Open navigation menu" aria-controls="primaryNav" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </nav>
@@ -551,10 +722,10 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Crafting elegant moments, one dish at a time.</h1>
-                <p>Cadre Catering Services brings refined cuisine, attentive service, and seamless event coordination to your most important celebrations.</p>
+                <p>Castro Catering Services brings refined cuisine, attentive service, and seamless event coordination to your most important celebrations.</p>
                 <div class="hero-buttons">
-                    <a href="#book" class="btn-primary">Book an Event</a>
-                    <a href="#smart" class="btn-secondary">Get a Smart Recommendation</a>
+                    <a href="booking.html" class="btn-primary">Book an Event</a>
+                    <a href="smartPicker.html" class="btn-secondary">Get a Smart Recommendation</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -581,172 +752,118 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2>A culinary tradition built on trust.</h2>
-        <p>From intimate dinners to grand weddings, our team of chefs and event specialists transforms every gathering into a memorable experience. We source the finest ingredients, design custom menus, and deliver warm, personal service every step of the way.</p>
-    </section>
-
     <!-- Packages Section -->
     <section class="packages" id="packages">
         <div class="packages-header">
             <h2>Featured Packages</h2>
-            <a href="#" class="view-all">View all packages →</a>
+            <div class="carousel-controls" aria-label="Featured packages controls">
+                <button class="carousel-btn" type="button" id="featuredPrev" aria-label="Previous packages">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                </button>
+                <button class="carousel-btn" type="button" id="featuredNext" aria-label="Next packages">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
         
-        <div class="packages-grid">
-            <!-- Package 1 -->
-            <div class="package-card">
-                <div class="package-image">[Grand Wedding Feast]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Grand Wedding Feast</h3>
-                    <p class="package-description">A timeless celebration with full-service elegance</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱1,223<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Grand Wedding Feast')">Book this package</button>
-                    </div>
-                </div>
-            </div>
+        <div class="featured-carousel" aria-label="Featured packages carousel">
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="featuredTrack" tabindex="0" aria-label="Featured packages list">
+                    <!-- Slide 1: three packages -->
+                    <div class="carousel-page" aria-label="Slide 1 of 2">
+                        <div class="carousel-page-grid">
+                            <div class="package-card">
+                                <div class="package-image">
+                                    <img src="../assests/grandWedding.jpg" alt="Grand Wedding Feast" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Grand Wedding Feast</h3>
+                                    <p class="package-description">A timeless celebration with full-service elegance</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">₱1,223<span>/guest</span></div>
+                                        <button class="btn-book" onclick="bookPackage('Grand Wedding Feast')">Book this package</button>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Package 2 -->
-            <div class="package-card">
-                <div class="package-image">[Corporate Essentials]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Corporate Essentials</h3>
-                    <p class="package-description">Perfect catering for meetings and conferences</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱750<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Corporate Essentials')">Book this package</button>
-                    </div>
-                </div>
-            </div>
+                            <div class="package-card">
+                                <div class="package-image">
+                                    <img src="../assests/bunyag.jpg" alt="Christening" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Christening Celebration</h3>
+                                    <p class="package-description">A warm, family-focused spread for your baby’s special day</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">₱750<span>/guest</span></div>
+                                        <button class="btn-book" onclick="bookPackage('Christening Celebration')">Book this package</button>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Package 3 -->
-            <div class="package-card">
-                <div class="package-image">[Birthday Bliss]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Birthday Bliss</h3>
-                    <p class="package-description">Joyful menus for milestone celebrations</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱1,000<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Birthday Bliss')">Book this package</button>
+                            <div class="package-card">
+                                <div class="package-image">
+                                    <img src="../assests/birthdayBliss.jpg" alt="Birthday Bliss" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Birthday Bliss</h3>
+                                    <p class="package-description">Joyful menus for milestone celebrations</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">₱1,000<span>/guest</span></div>
+                                        <button class="btn-book" onclick="bookPackage('Birthday Bliss')">Book this package</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Package 4 -->
-            <div class="package-card">
-                <div class="package-image">[Intimate Private Dining]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Intimate Private Dining</h3>
-                    <p class="package-description">Chef-curated tasting menus for small gatherings</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱1,800<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Intimate Private Dining')">Book this package</button>
-                    </div>
-                </div>
-            </div>
+                    <div class="carousel-page" aria-label="Slide 2 of 2">
+                        <div class="carousel-page-grid">
+                            <div class="package-card">
+                                <div class="package-image">
+                                    <img src="../assests/initmatePrivateDining.jpg" alt="Intimate Private Dining" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Intimate Private Dining</h3>
+                                    <p class="package-description">Chef-curated tasting menus for small gatherings</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">₱1,800<span>/guest</span></div>
+                                        <button class="btn-book" onclick="bookPackage('Intimate Private Dining')">Book this package</button>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Package 5 -->
-            <div class="package-card">
-                <div class="package-image">[Classic Wedding Buffet]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Classic Wedding Buffet</h3>
-                    <p class="package-description">A wedding essential with varied buffet options</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱950<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Classic Wedding Buffet')">Book this package</button>
-                    </div>
-                </div>
-            </div>
+                            <div class="package-card">
+                                <div class="package-image">
+                                    <img src="../assests/classicWedding.jpg" alt="Classic Wedding Buffet" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Classic Wedding Buffet</h3>
+                                    <p class="package-description">A wedding essential with varied buffet options</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">₱950<span>/guest</span></div>
+                                        <button class="btn-book" onclick="bookPackage('Classic Wedding Buffet')">Book this package</button>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Package 6 -->
-            <div class="package-card">
-                <div class="package-image">[Corporate Premium Gala]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Corporate Premium Gala</h3>
-                    <p class="package-description">Black-tie catering for galas, awards, and launches</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱1,500<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Corporate Premium Gala')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 7 -->
-            <div class="package-card">
-                <div class="package-image">[Corporate Lite Lunch]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Corporate Lite Lunch</h3>
-                    <p class="package-description">Quick, polished catering for workshops and trainings</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱650<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Corporate Lite Lunch')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 8 -->
-            <div class="package-card">
-                <div class="package-image">[Kids Birthday Fiesta]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Kids Birthday Fiesta</h3>
-                    <p class="package-description">Colorful, fun-filled menus your little ones will love</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱550<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Kids Birthday Fiesta')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 9 -->
-            <div class="package-card">
-                <div class="package-image">[Anniversary Elegance]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Anniversary Elegance</h3>
-                    <p class="package-description">A romantic, refined dinner to honor your milestone</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱1,400<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Anniversary Elegance')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 10 -->
-            <div class="package-card">
-                <div class="package-image">[Debut Soiree]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Debut Soiree</h3>
-                    <p class="package-description">An 18th birthday celebration done in grand style</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱950<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Debut Soiree')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 11 -->
-            <div class="package-card">
-                <div class="package-image">[Cocktail Reception]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Cocktail Reception</h3>
-                    <p class="package-description">Elegant canapés and signature drinks for stand-up events</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱750<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Cocktail Reception')">Book this package</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 12 -->
-            <div class="package-card">
-                <div class="package-image">[Family Gathering Special]</div>
-                <div class="package-content">
-                    <h3 class="package-title">Family Gathering Special</h3>
-                    <p class="package-description">Hearty Filipino favorites for warm family reunions</p>
-                    <div class="package-footer">
-                        <div class="package-price">₱850<span>/guest</span></div>
-                        <button class="btn-book" onclick="bookPackage('Family Gathering Special')">Book this package</button>
+                            <div class="package-card view-all-card">
+                                <div class="package-image">
+                                    <img src="../assests/debut1.jpg" alt="Classic Wedding Buffet" />
+                                </div>
+                                <div class="package-content">
+                                    <h3 class="package-title">Explore all packages</h3>
+                                    <p class="package-description">See the full menu, compare packages, and find the perfect fit for your event.</p>
+                                    <div class="package-footer">
+                                        <div class="package-price">More<span> packages</span></div>
+                                        <a class="btn-book" href="packages.html">View all packages</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -757,7 +874,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Cadre Catering</h3>
+                <h3>Castro Catering</h3>
                 <p>Crafting unforgettable culinary experiences for weddings, corporate events, and intimate gatherings since 2009.</p>
             </div>
             <div class="footer-section">
@@ -777,26 +894,29 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Cadre Catering Services. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2026 Castro Catering Services. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '70px';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'white';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.padding = '2rem';
-                navLinks.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            }
+        // Mobile Menu Toggle (class-based + accessible)
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const primaryNav = document.getElementById('primaryNav');
+
+        function closeMobileNav() {
+            if (!primaryNav) return;
+            primaryNav.classList.remove('open');
+            if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleMobileNav() {
+            if (!primaryNav) return;
+            const isOpen = primaryNav.classList.toggle('open');
+            if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileNav);
         }
 
         // Book Package Function
@@ -804,18 +924,9 @@
             alert(`Thank you for your interest in the "${packageName}" package! Our team will contact you shortly to discuss your event details.`);
         }
 
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Close mobile nav after clicking any nav link
+        document.querySelectorAll('#primaryNav a').forEach(a => {
+            a.addEventListener('click', () => closeMobileNav());
         });
 
         // Add scroll effect to navbar
@@ -827,6 +938,32 @@
                 nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
             }
         });
+
+        // Featured packages carousel (arrows + snap scrolling)
+        const featuredTrack = document.getElementById('featuredTrack');
+        const featuredPrev = document.getElementById('featuredPrev');
+        const featuredNext = document.getElementById('featuredNext');
+
+        function updateFeaturedButtons() {
+            if (!featuredTrack || !featuredPrev || !featuredNext) return;
+            const maxScrollLeft = featuredTrack.scrollWidth - featuredTrack.clientWidth;
+            featuredPrev.disabled = featuredTrack.scrollLeft <= 2;
+            featuredNext.disabled = featuredTrack.scrollLeft >= maxScrollLeft - 2;
+        }
+
+        function scrollFeaturedBy(direction) {
+            if (!featuredTrack) return;
+            const step = featuredTrack.clientWidth;
+            featuredTrack.scrollBy({ left: step * direction, behavior: 'smooth' });
+        }
+
+        if (featuredPrev) featuredPrev.addEventListener('click', () => scrollFeaturedBy(-1));
+        if (featuredNext) featuredNext.addEventListener('click', () => scrollFeaturedBy(1));
+        if (featuredTrack) {
+            featuredTrack.addEventListener('scroll', updateFeaturedButtons, { passive: true });
+            window.addEventListener('resize', updateFeaturedButtons);
+            updateFeaturedButtons();
+        }
 
         // Animate stats on scroll
         const observerOptions = {
@@ -847,22 +984,6 @@
             box.style.transform = 'translateY(20px)';
             box.style.transition = `all 0.6s ease-out ${index * 0.2}s`;
             observer.observe(box);
-        });
-
-        // Cart functionality (simple counter)
-        let cartCount = 2;
-        document.querySelectorAll('.btn-book').forEach(btn => {
-            btn.addEventListener('click', function() {
-                cartCount++;
-                document.querySelector('.cart-count').textContent = cartCount;
-                
-                // Animation for cart
-                const cartIcon = document.querySelector('.cart-icon');
-                cartIcon.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    cartIcon.style.transform = 'scale(1)';
-                }, 200);
-            });
         });
     </script>
 </body>

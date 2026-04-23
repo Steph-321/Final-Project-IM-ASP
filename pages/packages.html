@@ -254,12 +254,19 @@
         .package-image {
             width: 100%;
             height: 240px;
-            object-fit: cover;
             background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
+            overflow: hidden;
+        }
+
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .package-content {
@@ -506,6 +513,7 @@
                     <option value="All">All</option>
                     <option value="Wedding">Wedding</option>
                     <option value="Birthday">Birthday</option>
+                    <option value="Christening">Christening</option>
                     <option value="Corporate">Corporate</option>
                     <option value="Anniversary">Anniversary</option>
                     <option value="Debut">Debut</option>
@@ -557,7 +565,6 @@
     </footer>
 
     <script>
-        // Package data
         const packages = [
             {
                 id: 1,
@@ -572,6 +579,7 @@
                 ],
                 guests: '10-100',
                 price: 350,
+                imageSrc: '../assests/KidsBirthdayFiesta.jpg',
                 emoji: '🎈'
             },
             {
@@ -587,6 +595,7 @@
                 ],
                 guests: '10-120',
                 price: 380,
+                imageSrc: '../assests/corporateLiteLunch.jpg',
                 emoji: '💼'
             },
             {
@@ -602,22 +611,24 @@
                 ],
                 guests: '15-150',
                 price: 420,
+                imageSrc: '../assests/family gathering.jpg',
                 emoji: '👨‍‍👧👦'
             },
             {
                 id: 4,
-                name: 'Corporate Essentials',
-                category: ['Corporate'],
-                description: 'Perfect catering for meetings and conferences.',
+                name: 'Christening Celebration',
+                category: ['Christening', 'Family'],
+                description: 'A warm, family-focused spread for your baby’s special day.',
                 features: [
-                    'Buffet or plated service',
-                    'Coffee breaks included',
-                    'Professional service staff',
-                    'Customizable menu'
+                    'Family-style buffet',
+                    'Dessert & drinks station',
+                    'Soft theme styling',
+                    'Warm service staff'
                 ],
                 guests: '20-200',
                 price: 750,
-                emoji: '📊'
+                imageSrc: '../assests/bunyag.jpg',
+                emoji: '🕊️'
             },
             {
                 id: 5,
@@ -632,6 +643,7 @@
                 ],
                 guests: '30-150',
                 price: 900,
+                imageSrc: '../assests/cocktail.jpg',
                 emoji: '🍸'
             },
             {
@@ -647,6 +659,7 @@
                 ],
                 guests: '50-300',
                 price: 950,
+                imageSrc: '../assests/classicWedding.jpg',
                 emoji: '👰'
             },
             {
@@ -662,6 +675,7 @@
                 ],
                 guests: '50-200',
                 price: 1050,
+                imageSrc: '../assests/debut1.jpg',
                 emoji: '👗'
             },
             {
@@ -677,6 +691,7 @@
                 ],
                 guests: '20-150',
                 price: 850,
+                imageSrc: '../assests/birthdayBliss.jpg',
                 emoji: '🎂'
             },
             {
@@ -692,6 +707,7 @@
                 ],
                 guests: '20-100',
                 price: 1400,
+                imageSrc: '../assests/anniversaryElegance.jpg',
                 emoji: '💍'
             },
             {
@@ -707,6 +723,7 @@
                 ],
                 guests: '80-500',
                 price: 1200,
+                imageSrc: '../assests/grandWedding.jpg',
                 emoji: '🥂'
             },
             {
@@ -722,6 +739,7 @@
                 ],
                 guests: '50-300',
                 price: 1500,
+                imageSrc: '../assests/corporatePremium.jpg',
                 emoji: '🏆'
             },
             {
@@ -737,6 +755,7 @@
                 ],
                 guests: '10-30',
                 price: 1800,
+                imageSrc: '../assests/initmatePrivateDining.jpg',
                 emoji: '🍷'
             }
         ];
@@ -754,7 +773,9 @@
             
             grid.innerHTML = currentPackages.map(pkg => `
                 <div class="package-card">
-                    <div class="package-image">${pkg.emoji}</div>
+                    <div class="package-image">
+                        ${pkg.imageSrc ? `<img src="${pkg.imageSrc}" alt="${pkg.name}">` : pkg.emoji}
+                    </div>
                     <div class="package-content">
                         <div class="package-categories">
                             ${pkg.category.map(cat => `<span class="package-category">${cat}</span>`).join('')}
