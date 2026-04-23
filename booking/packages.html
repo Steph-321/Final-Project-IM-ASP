@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages - Castro Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #c2934a;
+            --light-gold: #f4d589;
+            --off-white: #fbf9f5;
+            --bg-cream: #f9f6f2;
+            --bg-white: #ffffff;
+            --bg-beige: #f0ebe4;
+            --text-dark: #2e211b;
+            --text-brown: #493a2f;
+            --text-gray: #756e64;
+            --border-light: #e5dcd0;
+            --success: #2d8a53;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-white);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--bg-beige);
+            color: var(--primary-gold);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .user-info .name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .user-info .email {
+            color: var(--text-gray);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: none;
+            color: var(--text-brown);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .page-header p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            max-width: 800px;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.8rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background: var(--bg-cream);
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: var(--bg-white);
+            box-shadow: 0 0 0 3px rgba(194, 147, 74, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.75rem 2.5rem 0.75rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            background: var(--bg-cream);
+            cursor: pointer;
+            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23756e64' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .package-count {
+            color: var(--text-gray);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Packages Grid */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .package-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .package-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .package-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .package-content {
+            padding: 1.5rem;
+        }
+
+        .package-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-beige);
+            color: var(--primary-gold);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .package-categories {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .package-name {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .package-description {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-features li {
+            padding: 0.4rem 0;
+            color: var(--text-brown);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .package-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .package-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .package-guests {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .package-price {
+            text-align: right;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            display: block;
+        }
+
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+        }
+
+        .price-amount span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-gray);
+        }
+
+        .btn-book-package {
+            width: 100%;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-book-package:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(194, 147, 74, 0.3);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-gray);
+            grid-column: 1 / -1;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-beige);
+            padding: 3rem 5%;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-section {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">🍽️</div>
+                Castro Catering
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="packages.html" class="active">Packages</a></li>
+                <li><a href="book.html">Book Now</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="smart-pick.html">Smart Pick</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="admin.html" style="background: var(--bg-beige); color: var(--primary-gold);">Admin</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="user-info">
+                    <div class="name">Sample Client</div>
+                    <div class="email">client@castro.com</div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <span>→</span> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Our Catering Packages</h1>
+            <p>Browse our full menu of curated experiences — from intimate private dinners to grand weddings. Every package is fully customizable.</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search packages..." onkeyup="filterPackages()">
+            </div>
+            
+            <div class="filter-group">
+                <select id="categoryFilter" class="filter-select" onchange="filterPackages()">
+                    <option value="All">All</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Anniversary">Anniversary</option>
+                    <option value="Debut">Debut</option>
+                    <option value="Family">Family</option>
+                </select>
+
+                <select id="sortFilter" class="filter-select" onchange="sortPackages()">
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+
+                <span class="package-count" id="packageCount">12 packages</span>
+            </div>
+        </div>
+
+        <!-- Packages Grid -->
+        <div class="packages-grid" id="packagesGrid">
+            <!-- Packages will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Castro Catering</h3>
+                <p>Crafting unforgettable culinary experiences for weddings, corporate events, and intimate gatherings since 2008.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>
+                    123 Reyes Avenue, Makati City<br>
+                    +63 2 8123 4567<br>
+                    hello@castrocatering.ph
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>
+                    Mon - Fri: 9:00 AM - 7:00 PM<br>
+                    Sat - Sun: 10:00 AM - 5:00 PM
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Castro Catering Services - Information Management Project Prototype</p>
+        </div>
+    </footer>
+
+    <script>
+        // Package data
+        const packages = [
+            {
+                id: 1,
+                name: 'Kids Birthday Fiesta',
+                category: ['Birthday'],
+                description: 'Colorful, fun-filled menus your little ones will love.',
+                features: [
+                    'Themed snack bar',
+                    'Mini burger & pizza station',
+                    'Candy buffet',
+                    'Mascot host'
+                ],
+                guests: '10-100',
+                price: 350,
+                emoji: '🎈'
+            },
+            {
+                id: 2,
+                name: 'Corporate Lite Lunch',
+                category: ['Corporate'],
+                description: 'Quick, polished catering for workshops and trainings.',
+                features: [
+                    'Boxed gourmet lunch',
+                    'Coffee & tea bar',
+                    'Fresh fruit platter',
+                    'Eco-friendly packaging'
+                ],
+                guests: '10-120',
+                price: 380,
+                emoji: '💼'
+            },
+            {
+                id: 3,
+                name: 'Family Gathering Spread',
+                category: ['Birthday', 'Anniversary', 'Family'],
+                description: 'Hearty Filipino favorites for warm family reunions.',
+                features: [
+                    'Lechon centerpiece',
+                    'Filipino buffet',
+                    'Halo-halo bar',
+                    'Tables & chairs setup'
+                ],
+                guests: '15-150',
+                price: 420,
+                emoji: '👨‍‍👧👦'
+            },
+            {
+                id: 4,
+                name: 'Corporate Essentials',
+                category: ['Corporate'],
+                description: 'Perfect catering for meetings and conferences.',
+                features: [
+                    'Buffet or plated service',
+                    'Coffee breaks included',
+                    'Professional service staff',
+                    'Customizable menu'
+                ],
+                guests: '20-200',
+                price: 750,
+                emoji: '📊'
+            },
+            {
+                id: 5,
+                name: 'Cocktail Reception',
+                category: ['Corporate', 'Anniversary'],
+                description: 'Elegant canapés and signature drinks for stand-up events.',
+                features: [
+                    'Passed hors d\'oeuvres',
+                    'Signature cocktails',
+                    'Bartender service',
+                    'Cocktail tables'
+                ],
+                guests: '30-150',
+                price: 900,
+                emoji: '🍸'
+            },
+            {
+                id: 6,
+                name: 'Classic Wedding Buffet',
+                category: ['Wedding'],
+                description: 'A wedding essential with varied buffet options.',
+                features: [
+                    'Multi-cuisine buffet',
+                    'Wedding cake service',
+                    'Champagne toast',
+                    'Elegant table settings'
+                ],
+                guests: '50-300',
+                price: 950,
+                emoji: '👰'
+            },
+            {
+                id: 7,
+                name: 'Debut Soirée',
+                category: ['Debut', 'Birthday'],
+                description: 'An 18th birthday celebration done in grand style.',
+                features: [
+                    'Formal dinner service',
+                    'Debut cake',
+                    '18 candles setup',
+                    'Premium beverages'
+                ],
+                guests: '50-200',
+                price: 1050,
+                emoji: '👗'
+            },
+            {
+                id: 8,
+                name: 'Birthday Bliss',
+                category: ['Birthday'],
+                description: 'Joyful menus for milestone celebrations.',
+                features: [
+                    'Custom birthday cake',
+                    'Party favorites',
+                    'Decoration setup',
+                    'Sound system'
+                ],
+                guests: '20-150',
+                price: 850,
+                emoji: '🎂'
+            },
+            {
+                id: 9,
+                name: 'Anniversary Elegance',
+                category: ['Anniversary', 'Wedding'],
+                description: 'A romantic, refined dinner to honor your milestone.',
+                features: [
+                    'Fine dining experience',
+                    'Wine pairing',
+                    'Floral centerpieces',
+                    'Personalized menu cards'
+                ],
+                guests: '20-100',
+                price: 1400,
+                emoji: '💍'
+            },
+            {
+                id: 10,
+                name: 'Grand Wedding Feast',
+                category: ['Wedding'],
+                description: 'A timeless celebration with full-service elegance.',
+                features: [
+                    'Premium multi-course menu',
+                    'Grand wedding cake',
+                    'Full bar service',
+                    'Dedicated event coordinator'
+                ],
+                guests: '80-500',
+                price: 1200,
+                emoji: '🥂'
+            },
+            {
+                id: 11,
+                name: 'Corporate Premium Gala',
+                category: ['Corporate'],
+                description: 'Black-tie catering for galas, awards, and launches.',
+                features: [
+                    'Gourmet plated dinner',
+                    'Premium wine selection',
+                    'Red carpet service',
+                    'AV equipment setup'
+                ],
+                guests: '50-300',
+                price: 1500,
+                emoji: '🏆'
+            },
+            {
+                id: 12,
+                name: 'Intimate Private Dining',
+                category: ['Anniversary', 'Wedding', 'Family'],
+                description: 'Chef-curated tasting menus for small gatherings.',
+                features: [
+                    'Private chef service',
+                    'Wine pairing',
+                    'Customized menu',
+                    'Intimate setting'
+                ],
+                guests: '10-30',
+                price: 1800,
+                emoji: '🍷'
+            }
+        ];
+
+        let currentPackages = [...packages];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPackages();
+        });
+
+        function renderPackages() {
+            const grid = document.getElementById('packagesGrid');
+            const count = document.getElementById('packageCount');
+            
+            grid.innerHTML = currentPackages.map(pkg => `
+                <div class="package-card">
+                    <div class="package-image">${pkg.emoji}</div>
+                    <div class="package-content">
+                        <div class="package-categories">
+                            ${pkg.category.map(cat => `<span class="package-category">${cat}</span>`).join('')}
+                        </div>
+                        <h3 class="package-name">${pkg.name}</h3>
+                        <p class="package-description">${pkg.description}</p>
+                        <ul class="package-features">
+                            ${pkg.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <div class="package-footer">
+                            <div class="package-guests">
+                                <span>👥</span> ${pkg.guests}
+                                <span style="margin-left: 1rem;">🍴 Per guest</span>
+                            </div>
+                            <div class="package-price">
+                                <span class="price-amount">₱${pkg.price} <span>/ guest</span></span>
+                            </div>
+                        </div>
+                        <button class="btn-book-package" onclick="bookPackage('${pkg.name}')">Book this package</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            count.textContent = `${currentPackages.length} package${currentPackages.length !== 1 ? 's' : ''}`;
+        }
+
+        function filterPackages() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            
+            currentPackages = packages.filter(pkg => {
+                const matchesSearch = pkg.name.toLowerCase().includes(searchTerm) || 
+                                    pkg.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === 'All' || pkg.category.includes(category);
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            sortPackages();
+        }
+
+        function sortPackages() {
+            const sortBy = document.getElementById('sortFilter').value;
+            
+            switch(sortBy) {
+                case 'low-high':
+                    currentPackages.sort((a, b) => a.price - b.price);
+                    break;
+                case 'high-low':
+                    currentPackages.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    currentPackages.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+            }
+            
+            renderPackages();
+        }
+
+        function bookPackage(packageName) {
+            window.location.href = `book.html?package=${encodeURIComponent(packageName)}`;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

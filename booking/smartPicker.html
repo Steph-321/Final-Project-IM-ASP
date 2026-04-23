@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pick - Castro Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #c2934a;
+            --light-gold: #f4d589;
+            --off-white: #fbf9f5;
+            --bg-cream: #f9f6f2;
+            --bg-white: #ffffff;
+            --bg-beige: #f0ebe4;
+            --text-dark: #2e211b;
+            --text-brown: #493a2f;
+            --text-gray: #756e64;
+            --border-light: #e5dcd0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-white);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--bg-beige);
+            color: var(--primary-gold);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .user-info .name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .user-info .email {
+            color: var(--text-gray);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: none;
+            color: var(--text-brown);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .form-section-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-brown);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background: var(--bg-cream);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: var(--bg-white);
+            box-shadow: 0 0 0 3px rgba(194, 147, 74, 0.1);
+        }
+
+        .btn-recommend {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-recommend:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(194, 147, 74, 0.3);
+        }
+
+        /* Result Card */
+        .result-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-beige);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .empty-state p {
+            color: var(--text-gray);
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        .result-content {
+            display: none;
+            width: 100%;
+        }
+
+        .result-content.show {
+            display: block;
+        }
+
+        .package-recommendation {
+            background: linear-gradient(135deg, var(--bg-cream), var(--bg-beige));
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--primary-gold);
+        }
+
+        .package-name {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .package-details {
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .btn-book-now {
+            background: var(--primary-gold);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-book-now:hover {
+            background: var(--text-brown);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-beige);
+            padding: 3rem 5%;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🍽️</div>
+                Castro Catering
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="book.html">Book Now</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="smart-pick.html" class="active">Smart Pick</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="admin.html" style="background: var(--bg-beige); color: var(--primary-gold);">Admin</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="user-info">
+                    <div class="name">Sample Client</div>
+                    <div class="email">client@castro.com</div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <span>→</span> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Smart Package Recommendation</h1>
+            <p>Tell us about your event and we'll suggest the best Castro package for you.</p>
+        </div>
+
+        <div class="content-grid">
+            <!-- Form Section -->
+            <div class="form-card">
+                <h2 class="form-section-title">Your Event</h2>
+                <form id="recommendationForm">
+                    <div class="form-group">
+                        <label for="budget">Total Budget (₱)</label>
+                        <input type="number" id="budget" name="budget" placeholder="50000" required min="5000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <input type="number" id="guests" name="guests" placeholder="60" required min="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType" name="eventType" required>
+                            <option value="wedding">Wedding</option>
+                            <option value="birthday">Birthday</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="debut">Debut</option>
+                            <option value="family">Family Gathering</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-recommend">
+                        <span>✨</span> Get Recommendation
+                    </button>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div class="result-card" id="resultCard">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">✨</div>
+                    <h3>Your suggestion will appear here</h3>
+                    <p>Enter your budget and guest count and we'll match the best package from our catalog.</p>
+                </div>
+
+                <div class="result-content" id="resultContent">
+                    <div class="package-recommendation">
+                        <div class="package-name" id="recPackageName">Grand Wedding Feast</div>
+                        <div class="package-price" id="recPackagePrice">₱1,200/guest</div>
+                        <p id="recPackageDesc">Perfect for elegant weddings with full-service dining experience</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-row">
+                                <span>Per Guest Cost:</span>
+                                <strong id="recPerGuest">₱1,200</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Total for <span id="recGuests">60</span> guests:</span>
+                                <strong id="recTotal">₱72,000</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Budget Remaining:</span>
+                                <strong id="recRemaining" style="color: var(--success);">₱0</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-book-now" onclick="bookRecommended()">
+                        Book This Package →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Castro Catering</h3>
+                <p>Crafting unforgettable culinary experiences for weddings, corporate events, and intimate gatherings since 2008.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>
+                    123 Reyes Avenue, Makati City<br>
+                    +63 2 8123 4567<br>
+                    hello@castrocatering.ph
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>
+                    Mon - Fri: 9:00 AM - 7:00 PM<br>
+                    Sat - Sun: 10:00 AM - 5:00 PM
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Castro Catering Services - Information Management Project Prototype</p>
+        </div>
+    </footer>
+
+    <script>
+        // Package database
+        const packages = [
+            { name: 'Kids Birthday Fiesta', price: 650, type: ['birthday'], desc: 'Colorful and fun menu perfect for children\'s parties' },
+            { name: 'Corporate Lite Lunch', price: 550, type: ['corporate'], desc: 'Quick and efficient catering for business meetings' },
+            { name: 'Family Gathering Spread', price: 800, type: ['family', 'birthday'], desc: 'Hearty Filipino favorites for family reunions' },
+            { name: 'Birthday Bliss', price: 850, type: ['birthday', 'debut'], desc: 'Celebratory menu for milestone birthdays' },
+            { name: 'Cocktail Reception', price: 900, type: ['corporate', 'anniversary'], desc: 'Elegant canapés and signature drinks' },
+            { name: 'Classic Wedding Buffet', price: 950, type: ['wedding'], desc: 'Traditional wedding buffet with varied options' },
+            { name: 'Debut Soirée', price: 1050, type: ['debut', 'birthday'], desc: 'Sophisticated menu for 18th birthday celebrations' },
+            { name: 'Anniversary Elegance', price: 1100, type: ['anniversary', 'wedding'], desc: 'Romantic and refined dinner experience' },
+            { name: 'Grand Wedding Feast', price: 1200, type: ['wedding'], desc: 'Premium wedding package with full-service elegance' },
+            { name: 'Corporate Premium Gala', price: 1300, type: ['corporate'], desc: 'Black-tie catering for galas and awards' },
+            { name: 'Intimate Private Dining', price: 1500, type: ['anniversary', 'wedding'], desc: 'Chef-curated tasting menus for small gatherings' }
+        ];
+
+        document.getElementById('recommendationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const budget = parseFloat(document.getElementById('budget').value);
+            const guests = parseInt(document.getElementById('guests').value);
+            const eventType = document.getElementById('eventType').value;
+            
+            // Calculate max per guest budget
+            const maxPerGuest = budget / guests;
+            
+            // Filter packages that match event type and are within budget
+            const matchingPackages = packages.filter(pkg => {
+                return pkg.type.includes(eventType) && pkg.price <= maxPerGuest;
+            });
+            
+            // Sort by price (descending) to get the best package within budget
+            matchingPackages.sort((a, b) => b.price - a.price);
+            
+            let recommended;
+            
+            if (matchingPackages.length > 0) {
+                recommended = matchingPackages[0];
+            } else {
+                // If no exact match, find closest package
+                recommended = packages
+                    .filter(pkg => pkg.type.includes(eventType))
+                    .sort((a, b) => Math.abs(a.price - maxPerGuest) - Math.abs(b.price - maxPerGuest))[0];
+                
+                if (!recommended) {
+                    recommended = packages[0]; // Fallback
+                }
+            }
+            
+            // Display recommendation
+            displayRecommendation(recommended, budget, guests);
+        });
+
+        function displayRecommendation(packageData, budget, guests) {
+            const totalCost = packageData.price * guests;
+            const remaining = budget - totalCost;
+            
+            document.getElementById('recPackageName').textContent = packageData.name;
+            document.getElementById('recPackagePrice').textContent = `₱${packageData.price.toLocaleString()}/guest`;
+            document.getElementById('recPackageDesc').textContent = packageData.desc;
+            document.getElementById('recPerGuest').textContent = `₱${packageData.price.toLocaleString()}`;
+            document.getElementById('recGuests').textContent = guests;
+            document.getElementById('recTotal').textContent = `₱${totalCost.toLocaleString()}`;
+            
+            const remainingEl = document.getElementById('recRemaining');
+            remainingEl.textContent = `₱${remaining.toLocaleString()}`;
+            remainingEl.style.color = remaining >= 0 ? 'var(--success)' : 'var(--danger)';
+            
+            // Hide empty state, show result
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('resultContent').classList.add('show');
+            
+            // Store for booking
+            sessionStorage.setItem('recommendedPackage', JSON.stringify({
+                ...packageData,
+                guests: guests,
+                totalCost: totalCost
+            }));
+        }
+
+        function bookRecommended() {
+            const pkg = JSON.parse(sessionStorage.getItem('recommendedPackage'));
+            if (pkg) {
+                // Redirect to booking page with pre-filled data
+                window.location.href = `book.html?package=${encodeURIComponent(pkg.name)}&guests=${pkg.guests}`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
